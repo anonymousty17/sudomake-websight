@@ -43,16 +43,6 @@
       transition: background-color 0.3s ease;
     }
 
-    body.light-mode::before {
-      background-color: rgba(255, 255, 255, 0.85);
-    }
-
-    body.light-mode {
-      /* Background for light mode (use same image) */
-      background-image: url('sunset.jpg');
-      color: #333;
-    }
-
     /* Ensure main UI sits above the overlay */
     header, nav, main, footer, .project-card {
       position: relative;
@@ -86,11 +76,6 @@
       animation: fadeIn 0.8s ease forwards;
     }
 
-    body.light-mode header {
-      background-color: rgba(255, 255, 255, 0.7);
-      color: #333;
-    }
-
     header h1 {
       margin: 0;
     }
@@ -108,10 +93,6 @@
       animation: fadeIn 0.8s ease 0.2s forwards;
     }
 
-    body.light-mode nav {
-      background-color: rgba(255, 255, 255, 0.5);
-    }
-
     nav a {
       color: white;
       margin: 0 1rem;
@@ -119,40 +100,9 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    body.light-mode nav a {
-      color: #333;
-    }
-
     nav a:hover {
       opacity: 0.7;
       transform: translateY(-2px);
-    }
-
-    .theme-toggle {
-      background-color: rgba(255, 255, 255, 0.2);
-      border: 2px solid white;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Workbench', sans-serif;
-      transition: all 0.3s ease;
-      font-size: 14px;
-    }
-
-    body.light-mode .theme-toggle {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-color: #333;
-      color: #333;
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.05);
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    body.light-mode .theme-toggle:hover {
-      background-color: rgba(0, 0, 0, 0.2);
     }
 
     main {
@@ -176,6 +126,59 @@
 
     section {
       scroll-margin-top: 80px;
+    }
+
+    .about-section {
+      background-color: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255,255,255,0.06);
+      font-size: 3rem;
+    }
+
+    .bio {
+      line-height: 1.6;
+    }
+
+    .skills {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background-color: rgba(255,255,255,0.12);
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    /* responsive: stack on small screens */
+    @media (max-width: 600px) {
+      .about-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .avatar {
+        margin: 0 auto;
+      }
     }
 
     .projects-grid {
@@ -207,20 +210,10 @@
       animation-delay: 0.6s;
     }
 
-    body.light-mode .project-card {
-      background-color: rgba(255, 255, 255, 0.8);
-      border-color: rgba(0, 0, 0, 0.1);
-    }
-
     .project-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       background-color: rgba(255, 255, 255, 0.15);
-    }
-
-    body.light-mode .project-card:hover {
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
 
     .project-icon {
@@ -240,10 +233,6 @@
       animation: none;
     }
 
-    body.light-mode .project-card p {
-      opacity: 0.8;
-    }
-
     .project-tags {
       display: flex;
       flex-wrap: wrap;
@@ -259,21 +248,12 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    body.light-mode .tag {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-color: rgba(0, 0, 0, 0.2);
-    }
-
     .project-link {
       display: inline-block;
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s ease;
-    }
-
-    body.light-mode .project-link {
-      color: #333;
     }
 
     .project-link:hover {
@@ -307,11 +287,6 @@
       flex-wrap: wrap;
     }
 
-    body.light-mode footer {
-      background-color: rgba(255, 255, 255, 0.7);
-      color: #333;
-    }
-
     .github-link {
       display: inline-flex;
       align-items: center;
@@ -324,18 +299,9 @@
       transition: all 0.3s ease;
     }
 
-    body.light-mode .github-link {
-      color: #333;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-
     .github-link:hover {
       background-color: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
-    }
-
-    body.light-mode .github-link:hover {
-      background-color: rgba(0, 0, 0, 0.2);
     }
 
     .github-icon {
@@ -452,50 +418,67 @@
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Theme</button>
-  </nav>
+  </nav> 
   <main>
     <section id="home">
       <h2>About This Site</h2>
       <p>Hi, welcome to my website</p>
     </section>
 
+    <!-- About section: replace placeholders like [Your Name] and email -->
+    <section id="about" style="margin-top: 3rem;">
+      <h2>About Me</h2>
+      <div class="about-section">
+        <div class="avatar" aria-hidden="true">🐧</div>
+        <div>
+          <p class="bio"><strong>Hi — I'm Nerdynomad.</strong> Passionate about Linux and open source. While I’m not a professional developer, I love tinkering with web development, building experiments, and contributing to OSS. I release all of my projects under CC0 (public domain) so anyone can use, modify, or distribute them freely.</p>
+
+          
+         <p style="margin-top:0.75rem;"><a href="https://github.com/anonymousty17" style="color:white; text-decoration:underline;">GitHub</a></p>
+        </div>
+      </div>
+    </section>
+
     <section id="projects" style="margin-top: 3rem;">
       <h2>My Projects</h2>
       <div class="projects-grid">
         <div class="project-card">
+          <div class="project-icon">🤖</div>
+          <h3>Dave — humanoid robot</h3>Dave is a fully autonomous humanoid robot built on a distributed hardware architecture. The project focuses on integrating edge-AI perception with expressive human-robot interaction. 
+Technical Specifications:
+Primary Compute: NVIDIA Jetson Nano running a Python-based software stack for real-time perception and decision-making.
+Interaction Module: Raspberry Pi dedicated to driving an LED matrix for dynamic speech visualization and eye expressions.
+Architecture: Utilizes a distributed system where the Jetson Nano handles heavy AI inference while the Raspberry Pi manages low-latency hardware peripherals. 
+Status:
+This project is currently a Work in Progress (WIP). I am refining the core autonomy algorithms and interaction scripts before releasing the full source code and 3D design files on GitHub. 
+Planned Features:
+Autonomous Navigation: Vision-based obstacle avoidance and path planning.
+Expressive Interaction: Synchronized facial expressions via the LED matrix.
+Python API: A modular library for easy expansion of humanoid behaviors.<div class="project-tags">
+          <p>
+            <span class="tag">Jetson Nano</span>
+            <span class="tag">Raspberry Pi Pico</span>
+            <span class="tag">Python</span>
+            <span class="tag">LED Matrix</span>
+            <span class="tag">Autonomy</span>
+          </div>
+          <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+
+        <div class="project-card">
           <div class="project-icon">🚀</div>
-          <h3>Project One</h3>
-          <p>A cool project I built using HTML, CSS, and JavaScript. It does amazing things!</p>
+          <h3>Building this website</h3>
+          <p>This project documents the creation of this website — design choices, responsive CSS, and the small JavaScript features (animations, interactions).</p>
           <div class="project-tags">
             <span class="tag">HTML</span>
             <span class="tag">CSS</span>
             <span class="tag">JavaScript</span>
-          </div>
-          <a href="#" class="project-link">View Project →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-icon">💻</div>
-          <h3>Project Two</h3>
-          <p>Another awesome project that showcases my skills in web development.</p>
-          <div class="project-tags">
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-          </div>
-          <a href="#" class="project-link">View Project →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-icon">🎨</div>
-          <h3>Project Three</h3>
-          <p>A creative design project that combines functionality with beautiful aesthetics.</p>
-          <div class="project-tags">
             <span class="tag">Design</span>
-            <span class="tag">UI/UX</span>
           </div>
-          <a href="#" class="project-link">View Project →</a>
+          <a href="https://github.com/anonymousty17" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
         </div>
+
+
       </div>
     </section>
   </main>
@@ -509,23 +492,6 @@
     </a>
   </footer>
 
-  <script>
-    // Check for saved theme preference or default to dark mode
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    if (currentTheme === 'light') {
-      document.body.classList.add('light-mode');
-    }
 
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      
-      // Save the preference
-      if (document.body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light');
-      } else {
-        localStorage.setItem('theme', 'dark');
-      }
-    }
-  </script>
 </body>
 </html>
