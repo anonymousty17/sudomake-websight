@@ -1,15 +1,57 @@
 <!DOCTYPE html>
-<html>
-<head> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nerdynomad - Linux enthusiast, open source contributor, and maker. Projects include Dave the humanoid robot and web experiments.">
+  <meta name="theme-color" content="#0f0f0f">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single+Ink:wght@100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Story+Script&family=Workbench&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single+Ink:wght@100..900&family=Story+Script&family=Workbench&display=swap" rel="stylesheet">
 
-  <title>My Website</title>
+  <title>Nerdynomad — Linux, Open Source & Robots</title>
+
   <style>
+    :root {
+      --bg-overlay: rgba(0, 0, 0, 0.55);
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --card-hover: rgba(255, 255, 255, 0.14);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --accent: #ff9f43;
+      --tag-bg: rgba(255, 255, 255, 0.12);
+      --header-bg: rgba(0, 0, 0, 0.3);
+      --nav-bg: rgba(0, 0, 0, 0.25);
+      --footer-bg: rgba(0, 0, 0, 0.4);
+      --shadow: rgba(0, 0, 0, 0.4);
+      --progress-bg: rgba(255,255,255,0.1);
+      --progress-fill: var(--accent);
+    }
+
+    [data-theme="light"] {
+      --bg-overlay: rgba(255, 255, 255, 0.75);
+      --card-bg: rgba(255, 255, 255, 0.65);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.85);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a6a;
+      --accent: #e67e22;
+      --tag-bg: rgba(0, 0, 0, 0.06);
+      --header-bg: rgba(255, 255, 255, 0.5);
+      --nav-bg: rgba(255, 255, 255, 0.4);
+      --footer-bg: rgba(255, 255, 255, 0.5);
+      --shadow: rgba(0, 0, 0, 0.1);
+      --progress-bg: rgba(0,0,0,0.08);
+      --progress-fill: var(--accent);
+    }
+
     * {
-      transition: background-color 0.3s ease, color 0.3s ease;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     html {
@@ -20,15 +62,15 @@
       margin: 0;
       padding: 0;
       padding-bottom: 80px;
-      /* Default background (dark mode as default) */
-      background-image: url('sunset.jpg');
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      color: white;
+      color: var(--text-primary);
       font-family: 'Workbench', sans-serif;
       min-height: 100vh;
       position: relative;
+      line-height: 1.6;
     }
 
     body::before {
@@ -38,73 +80,170 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: var(--bg-overlay);
       z-index: 0;
       transition: background-color 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    /* Scroll Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #ff6b6b);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.1s ease;
     }
 
     /* Ensure main UI sits above the overlay */
-    header, nav, main, footer, .project-card {
+    header, nav, main, footer, .project-card, .about-section {
       position: relative;
       z-index: 1;
     }
 
-    /* Story Script class (from provided embed) */
     .story-script-regular {
-      font-family: "Story Script", sans-serif;
+      font-family: "Story Script", cursive;
       font-weight: 400;
       font-style: normal;
     }
 
-    /* Workbench variable-style class — unique descriptive name */
     .workbench-variable {
       font-family: "Workbench", sans-serif;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal;
-      font-variation-settings:
-        "BLED" 0,
-        "SCAN" 0;
+      font-variation-settings: "BLED" 0, "SCAN" 0;
     }
 
+    /* Header */
     header {
-      background-color: rgba(0, 0, 0, 0.3);
-      color: white;
-      padding: 1.5rem;
+      background-color: var(--header-bg);
+      color: var(--text-primary);
+      padding: 2.5rem 1.5rem;
       text-align: center;
       opacity: 0;
       animation: fadeIn 0.8s ease forwards;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
     }
 
     header h1 {
       margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
     }
 
+    .typing-text::after {
+      content: '|';
+      animation: blink 1s infinite;
+      color: var(--accent);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      opacity: 0.8;
+      font-size: 1.1rem;
+    }
+
+    /* Navigation */
     nav {
-      background-color: rgba(0, 0, 0, 0.2);
-      padding: 0.5rem;
+      background-color: var(--nav-bg);
+      padding: 0.75rem;
       text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.5rem;
       opacity: 0;
       animation: fadeIn 0.8s ease 0.2s forwards;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     nav a {
-      color: white;
-      margin: 0 1rem;
+      color: var(--text-primary);
+      margin: 0 0.75rem;
       text-decoration: none;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      position: relative;
+      font-size: 0.95rem;
     }
 
-    nav a:hover {
-      opacity: 0.7;
+    nav a:hover, nav a.active {
+      opacity: 1;
+      background-color: var(--card-bg);
       transform: translateY(-2px);
     }
 
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after, nav a.active::after {
+      width: 60%;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-left: 1rem;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Workbench', sans-serif;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      background: var(--card-hover);
+      transform: scale(1.05);
+    }
+
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    /* Main */
     main {
       padding: 2rem;
       max-width: 1200px;
@@ -117,120 +256,226 @@
       margin-top: 0;
       animation: slideInLeft 0.8s ease 0.6s forwards;
       opacity: 0;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    main h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
     }
 
     main p {
       animation: slideInLeft 0.8s ease 0.8s forwards;
       opacity: 0;
+      color: var(--text-secondary);
     }
 
     section {
-      scroll-margin-top: 80px;
+      scroll-margin-top: 100px;
+      margin-bottom: 3rem;
     }
 
+    /* About Section */
     .about-section {
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      padding: 1.5rem;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
       display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 1rem;
-      align-items: center;
-      margin-top: 2rem;
-      border: 1px solid rgba(255,255,255,0.08);
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin-top: 1.5rem;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px var(--shadow);
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 10px;
+      width: 140px;
+      height: 140px;
+      border-radius: 12px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(255,255,255,0.06);
-      font-size: 3rem;
+      background: linear-gradient(135deg, var(--accent), #ff6b6b);
+      font-size: 4rem;
+      box-shadow: 0 4px 15px var(--shadow);
     }
 
     .bio {
-      line-height: 1.6;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .bio strong {
+      color: var(--text-primary);
+      font-size: 1.1rem;
     }
 
     .skills {
-      margin-top: 0.75rem;
+      margin-top: 1rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
     .skill-tag {
-      background-color: rgba(255,255,255,0.12);
-      padding: 0.25rem 0.6rem;
-      border-radius: 12px;
+      background-color: var(--tag-bg);
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
       font-size: 0.85rem;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+      cursor: default;
     }
 
-    /* responsive: stack on small screens */
-    @media (max-width: 600px) {
-      .about-section {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .avatar {
-        margin: 0 auto;
-      }
+    .skill-tag:hover {
+      background-color: var(--accent);
+      color: white;
+      transform: translateY(-2px);
     }
 
+    .social-links {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background: var(--tag-bg);
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .social-links a:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-item {
+      background: var(--card-bg);
+      padding: 1.2rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px var(--shadow);
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--progress-bg);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #ff6b6b);
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.5s ease;
+    }
+
+    /* Projects */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .project-card {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
+      background-color: var(--card-bg);
+      border-radius: 16px;
       padding: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--card-border);
       transition: all 0.4s ease;
       opacity: 0;
       animation: fadeInUp 0.8s ease forwards;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
     }
 
-    .project-card:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-
-    .project-card:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-
-    .project-card:nth-child(3) {
-      animation-delay: 0.6s;
-    }
+    .project-card:nth-child(1) { animation-delay: 0.2s; }
+    .project-card:nth-child(2) { animation-delay: 0.4s; }
+    .project-card:nth-child(3) { animation-delay: 0.6s; }
 
     .project-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 40px var(--shadow);
+      background-color: var(--card-hover);
+      border-color: var(--accent);
     }
 
     .project-icon {
       font-size: 3rem;
       margin-bottom: 1rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      transform: scale(1.2) rotate(5deg);
     }
 
     .project-card h3 {
       margin: 0 0 1rem 0;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      color: var(--text-primary);
     }
 
     .project-card p {
       margin: 0 0 1.5rem 0;
-      opacity: 0.9;
+      color: var(--text-secondary);
       line-height: 1.6;
       animation: none;
+      opacity: 1;
+      flex-grow: 1;
     }
 
     .project-tags {
@@ -241,19 +486,28 @@
     }
 
     .tag {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: var(--tag-bg);
       padding: 0.3rem 0.8rem;
       border-radius: 15px;
-      font-size: 0.85rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 0.8rem;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      background: var(--accent);
+      color: white;
     }
 
     .project-link {
-      display: inline-block;
-      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s ease;
+      margin-top: auto;
     }
 
     .project-link:hover {
@@ -261,6 +515,155 @@
       opacity: 0.8;
     }
 
+    .project-status {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .status-wip {
+      background: rgba(255, 159, 67, 0.2);
+      color: #ff9f43;
+      border: 1px solid rgba(255, 159, 67, 0.3);
+    }
+
+    .status-active {
+      background: rgba(46, 213, 115, 0.2);
+      color: #2ed573;
+      border: 1px solid rgba(46, 213, 115, 0.3);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      margin-top: 1.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--tag-bg);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .contact-item:hover {
+      transform: translateY(-3px);
+      background: var(--card-hover);
+      border-color: var(--accent);
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+    }
+
+    .contact-info h4 {
+      margin: 0 0 0.2rem 0;
+      font-size: 0.95rem;
+    }
+
+    .contact-info span {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--footer-bg);
+      color: var(--text-primary);
+      text-align: center;
+      padding: 1.2rem;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--card-border);
+      z-index: 100;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background-color: var(--tag-bg);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--card-border);
+    }
+
+    .github-link:hover {
+      background-color: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .github-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Scroll to top */
+    .scroll-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 45px;
+      height: 45px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 99;
+      backdrop-filter: blur(10px);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -272,50 +675,9 @@
       }
     }
 
-    footer {
-      background-color: rgba(0, 0, 0, 0.3);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .github-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: white;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .github-link:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .github-icon {
-      width: 20px;
-      height: 20px;
-    }
-
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @keyframes slideInLeft {
@@ -329,29 +691,49 @@
       }
     }
 
-    /* Mobile improvements */
+    /* Responsive */
     @media (max-width: 768px) {
       header {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
       }
 
       header h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 1rem;
       }
 
       nav {
-        padding: 0.75rem;
-        gap: 0.5rem;
+        flex-direction: column;
+        padding: 0.5rem;
+        position: relative;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+      }
+
+      .nav-links.active {
+        display: flex;
       }
 
       nav a {
-        margin: 0 0.5rem;
-        font-size: 14px;
+        margin: 0;
+        width: 100%;
+        text-align: center;
       }
 
-      .theme-toggle {
-        padding: 0.4rem 0.8rem;
-        font-size: 12px;
+      .nav-controls {
+        margin-left: 0;
+        margin-top: 0.5rem;
       }
 
       main {
@@ -359,7 +741,22 @@
       }
 
       main h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+      }
+
+      .about-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .avatar {
+        margin: 0 auto;
+        width: 120px;
+        height: 120px;
+      }
+
+      .social-links {
+        justify-content: center;
       }
 
       .projects-grid {
@@ -371,120 +768,224 @@
         padding: 1.5rem;
       }
 
-      .project-icon {
-        font-size: 2.5rem;
+      .skills-grid {
+        grid-template-columns: 1fr;
       }
 
       footer {
         padding: 0.75rem;
-        font-size: 14px;
+        font-size: 0.85rem;
       }
 
-      .github-link {
-        font-size: 14px;
-        padding: 0.4rem 0.8rem;
+      .scroll-top {
+        bottom: 90px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
       }
     }
 
     @media (max-width: 480px) {
       header h1 {
-        font-size: 1.2rem;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      nav a {
-        margin: 0.25rem 0;
+        font-size: 1.4rem;
       }
 
       main h2 {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
       }
 
-      main p {
-        font-size: 14px;
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html {
+        scroll-behavior: auto;
       }
     }
   </style>
 </head>
 <body>
+  <div class="progress-bar" id="progressBar"></div>
+
   <header>
-    <h1>Welcome to My Website</h1>
+    <h1 class="typing-text" id="typingText">Nerdynomad</h1>
+    <p>Linux · Open Source · Robotics · Web</p>
   </header>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-  </nav> 
+
+  <nav id="navbar">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-controls">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </nav>
+
   <main>
     <section id="home">
       <h2>About This Site</h2>
-      <p>Hi, welcome to my website</p>
+      <p>Welcome to my digital playground. This is where I document my experiments with Linux, open-source tools, robotics, and web development. Everything here is released under CC0 — take it, break it, improve it.</p>
     </section>
 
-    <!-- About section: replace placeholders like [Your Name] and email -->
-    <section id="about" style="margin-top: 3rem;">
+    <section id="about">
       <h2>About Me</h2>
       <div class="about-section">
         <div class="avatar" aria-hidden="true">🐧</div>
         <div>
-          <p class="bio"><strong>Hi — I'm Nerdynomad.</strong> Passionate about Linux and open source. While I’m not a professional developer, I love tinkering with web development, building experiments, and contributing to OSS. I release all of my projects under CC0 (public domain) so anyone can use, modify, or distribute them freely.</p>
-
-          
-         <p style="margin-top:0.75rem;"><a href="https://github.com/anonymousty17" style="color:white; text-decoration:underline;">GitHub</a></p>
+          <p class="bio"><strong>Hi — I'm Nerdynomad.</strong> Passionate about Linux and open source. While I'm not a professional developer, I love tinkering with web development, building experiments, and contributing to OSS. I release all of my projects under CC0 (public domain) so anyone can use, modify, or distribute them freely.</p>
+          <div class="skills">
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Open Source</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Robotics</span>
+            <span class="skill-tag">Web Dev</span>
+            <span class="skill-tag">CC0</span>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/anonymousty17" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="mailto:nerdynomad@example.com">
+              📧 Email
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="projects" style="margin-top: 3rem;">
+    <section id="skills">
+      <h2>Skills & Tools</h2>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-header">
+            <span>Linux / Sysadmin</span>
+            <span>85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span>Python</span>
+            <span>70%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span>HTML / CSS / JS</span>
+            <span>65%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span>Robotics / Embedded</span>
+            <span>60%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span>Git / GitHub</span>
+            <span>75%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header">
+            <span>Open Source Contribution</span>
+            <span>80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
       <h2>My Projects</h2>
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-icon">🤖</div>
-          <h3>Dave — humanoid robot</h3>Dave is a fully autonomous humanoid robot built on a distributed hardware architecture. The project focuses on integrating edge-AI perception with expressive human-robot interaction. 
-Technical Specifications:
-Primary Compute: NVIDIA Jetson Nano running a Python-based software stack for real-time perception and decision-making.
-Interaction Module: Raspberry Pi dedicated to driving an LED matrix for dynamic speech visualization and eye expressions.
-Architecture: Utilizes a distributed system where the Jetson Nano handles heavy AI inference while the Raspberry Pi manages low-latency hardware peripherals. 
-Status:
-This project is currently a Work in Progress (WIP). I am refining the core autonomy algorithms and interaction scripts before releasing the full source code and 3D design files on GitHub. 
-Planned Features:
-Autonomous Navigation: Vision-based obstacle avoidance and path planning.
-Expressive Interaction: Synchronized facial expressions via the LED matrix.
-Python API: A modular library for easy expansion of humanoid behaviors.<div class="project-tags">
-          <p>
+          <span class="project-status status-wip">Work in Progress</span>
+          <h3>Dave — Humanoid Robot</h3>
+          <p>Dave is a fully autonomous humanoid robot built on a distributed hardware architecture. The project focuses on integrating edge-AI perception with expressive human-robot interaction.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;"><strong>Primary Compute:</strong> NVIDIA Jetson Nano running Python for real-time perception and decision-making.<br><strong>Interaction Module:</strong> Raspberry Pi driving an LED matrix for dynamic speech visualization and eye expressions.<br><strong>Architecture:</strong> Distributed system where Jetson handles AI inference while the Pi manages low-latency hardware peripherals.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;"><strong>Planned:</strong> Vision-based navigation, synchronized LED expressions, and a modular Python API for behaviors.</p>
+          <div class="project-tags">
             <span class="tag">Jetson Nano</span>
-            <span class="tag">Raspberry Pi Pico</span>
+            <span class="tag">Raspberry Pi</span>
             <span class="tag">Python</span>
             <span class="tag">LED Matrix</span>
             <span class="tag">Autonomy</span>
           </div>
-          <a href="#" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+          <a href="https://github.com/anonymousty17" class="project-link" target="_blank" rel="noopener noreferrer">
+            View Project →
+          </a>
         </div>
 
         <div class="project-card">
           <div class="project-icon">🚀</div>
-          <h3>Building this website</h3>
-          <p>This project documents the creation of this website — design choices, responsive CSS, and the small JavaScript features (animations, interactions).</p>
+          <span class="project-status status-active">Active</span>
+          <h3>This Website</h3>
+          <p>This project documents the creation of this website — design choices, responsive CSS, dark/light mode toggle, scroll animations, and the small JavaScript features that make it interactive.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.9rem;">Built with vanilla HTML, CSS, and JavaScript. No frameworks, no dependencies. Just clean, accessible code released under CC0.</p>
           <div class="project-tags">
             <span class="tag">HTML</span>
             <span class="tag">CSS</span>
             <span class="tag">JavaScript</span>
-            <span class="tag">Design</span>
+            <span class="tag">Responsive</span>
+            <span class="tag">Accessibility</span>
           </div>
-          <a href="https://github.com/anonymousty17" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>
+          <a href="https://github.com/anonymousty17" class="project-link" target="_blank" rel="noopener noreferrer">
+            View Project →
+          </a>
         </div>
+      </div>
+    </section>
 
-
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <p>Have a question about one of my projects? Want to collaborate on something open source? Feel free to reach out.</p>
+      <div class="contact-grid">
+        <a href="https://github.com/anonymousty17" class="contact-item" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </span>
+          <div class="contact-info">
+            <h4>GitHub</h4>
+            <span>@anonymousty17</span>
+          </div>
+        </a>
+        <a href="mailto:nerdynomad@example.com" class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div class="contact-info">
+            <h4>Email</h4>
+            <span>nerdynomad@example.com</span>
+          </div>
+        </a>
       </div>
     </section>
   </main>
+
   <footer>
     <span>No rights reserved — released under CC0</span>
-    <a href="https://github.com/anonymousty17" class="github-link" target="_blank">
+    <a href="https://github.com/anonymousty17" class="github-link" target="_blank" rel="noopener noreferrer">
       <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
       </svg>
@@ -492,6 +993,130 @@ Python API: A modular library for easy expansion of humanoid behaviors.<div clas
     </a>
   </footer>
 
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
 
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    const body = document.body;
+
+    // Check saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      body.setAttribute('data-theme', 'light');
+      themeIcon.textContent = '☀️';
+      themeText.textContent = 'Light';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = body.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        body.removeAttribute('data-theme');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.setAttribute('data-theme', 'light');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    // Active Navigation Highlighting
+    const sections = document.querySelectorAll('section');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navAnchors.forEach(anchor => {
+        anchor.classList.remove('active');
+        if (anchor.getAttribute('href') === '#' + current) {
+          anchor.classList.add('active');
+        }
+      });
+    });
+
+    // Scroll Progress Bar
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (scrollTop / scrollHeight) * 100;
+      progressBar.style.width = scrolled + '%';
+    });
+
+    // Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Animate skill bars on scroll
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const animateSkills = () => {
+      skillFills.forEach(fill => {
+        const rect = fill.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          fill.style.width = fill.getAttribute('data-width') + '%';
+        }
+      });
+    };
+
+    window.addEventListener('scroll', animateSkills);
+    // Trigger once on load
+    animateSkills();
+
+    // Typing effect for header
+    const typingText = document.getElementById('typingText');
+    const originalText = typingText.textContent;
+    typingText.textContent = '';
+    let charIndex = 0;
+
+    const typeChar = () => {
+      if (charIndex < originalText.length) {
+        typingText.textContent += originalText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeChar, 150);
+      }
+    };
+
+    setTimeout(typeChar, 500);
+  </script>
 </body>
 </html>
